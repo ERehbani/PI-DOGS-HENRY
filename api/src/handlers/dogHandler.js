@@ -8,7 +8,7 @@ const getDogHandler = async(req, res) => {
 
 const getBreedIdHandler = (req, res) => {
     const {id} = req.params;
-    res.send(`Envia el detalle de la raza ${id}`)
+    res.send(`Envia eal detalle de la raza ${id}`)
 }
 
 const createDogHandler = (req, res) => {
