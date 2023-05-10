@@ -16,8 +16,6 @@ const basename = path.basename(__filename);
 
 const modelDefiners = [];
 
-DogModel(sequelize)
-TemperamentModel(sequelize)
 
 
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
@@ -36,6 +34,9 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
+DogModel(sequelize)
+TemperamentModel(sequelize)
+
 const { Dog, Temperaments } = sequelize.models;
 
 // Aca vendrian las relaciones

@@ -13,13 +13,13 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    imagen: {
+    image: {
       type: DataTypes.STRING,
       allowNull: false
     },
     height: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     weight: {
       type: DataTypes.STRING,
@@ -34,5 +34,8 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: true
     }
+
+  },{
+    timestamps: false
   });
 };
