@@ -1,25 +1,45 @@
-const { default: axios } = require("axios")
-const Temperament = require('../db')
+const axios = require("axios")
+const  { Temperaments }  = require('../db')
+const { API_KEY } = process.env
 
 const getTemperament = async () => {
-    const dataApi = await axios('https://api.thedogapi.com/v1/breeds')
-    let allTemps = dataApi.data.map((el) => (el.temperament ? el.temperament : "No existe temperamento" )).map((el) => (el?.split(", "))) // mapeo la data de la api y si encuentra datos, los separa con una coma
-
-    let temps = [...new Set(allTemps.flat())];  // elimina strings repetidos y los agrega a un array
-
-    temps.forEach((el) => {
-        if(el) {                        //se crea donde el nombre sea igual al elemento
-            Temperament.findOrCreate({
-                where: {
-                    name: el
-                }
-            })
+    console.log('232323')
+    // const dataApi = await axios('https://api.thedogapi.com/v1/breeds')
+    const apiArray = []
+    let i = 0
+    const tempArray = []
+    let coma = ', '
+    try {
+        while (i < 2) {
+            let apiData = await axios(`https://api.thedogapi.com/v1/breeds?limit=100&page=${i})//?apy_key=${API_KEY}`);
+            // [   [ {}{}{} ],[ {}{}{} ]    ]
+            apiArray.push(apiData);
+            i++;
         }
-    })
-    temps = await Temperament.findAll({
-        attributes: { exclude: ["createdAt", "updateAt", "deletedAt"]}
-    })
-    return temps
+        (await Promise.all(apiArray)).map(res=> 
+            res.data.map(data=>{
+                (!data.temperament) ? tempArray.push('')
+                : tempArray.push(data.temperament.split(coma));
+            }) 
+            )
+        //Flat() devuelve 1 solo Array (Array Con subArrays)
+        //SET() Set  permite almacenar valores únicos/no repetidos de cualquier tipo
+        const filteredTemperaments = [...new Set(tempArray.flat())];
+
+        filteredTemperaments.forEach((temperament =>{
+            if(temperament) {
+            Temperaments.findOrCreate({
+                where: { name: temperament.trim() },
+              })}
+        }));
+
+        return filteredTemperaments;
+
+    } catch (error) {
+
+        return {error: error.message}
+    }
 }
 
-module.exports = getTemperament
+
+module.exports = getTemperament;

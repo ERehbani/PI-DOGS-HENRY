@@ -1,15 +1,25 @@
-const { createDog } = require("../controllers/dogControllers")
-
+const { createDog, getBreedById, searchDogByName, getAllDogs } = require("../controllers/dogControllers")
+const Dog = require('../models/Dog')
 
 const getDogHandler = async(req, res) => {
     const { name } = req.query
-    if(name !== undefined) res.send(`Llamar a la funcion que busca por nombre`) 
-    else res.send('quiero enviar todos los usuarios')
+
+    const results = name ? await searchDogByName(name) : await getAllDogs()
+
+    res.status(200).json(results)
 }
 
-const getBreedIdHandler = (req, res) => {
+const getBreedIdHandler = async(req, res) => {
     const {id} = req.params;
-    res.send(`Envia el detalle de la raza ${id}`)
+    const source = isNaN(id) ? "bdd" : "api"
+    // isNaN (412-k312h7f3-423l4i-234)
+    // else /23
+    try {
+        const breed = await getBreedById(id, source)
+        res.status(200).json(breed)
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 }
 
 const createDogHandler = async (req, res) => {
@@ -22,5 +32,7 @@ const createDogHandler = async (req, res) => {
     }
 
 }
+
+
 
 module.exports = {getDogHandler, getBreedIdHandler, createDogHandler}
