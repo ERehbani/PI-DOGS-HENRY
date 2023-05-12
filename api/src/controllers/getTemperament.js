@@ -25,14 +25,15 @@ const getTemperament = async () => {
         //Flat() devuelve 1 solo Array (Array Con subArrays)
         //SET() Set  permite almacenar valores únicos/no repetidos de cualquier tipo
         const filteredTemperaments = [...new Set(tempArray.flat())];
-
+            // console.log(filteredTemperaments)
         filteredTemperaments.forEach((temperament =>{
             if(temperament) {
             Temperaments.findOrCreate({
                 where: { name: temperament.trim() },
-              })}
+            })}
         }));
 
+        // const idTemperaments = filteredTemperaments.map((string, index) => ({ id: index + 1, name: string }));
         return filteredTemperaments;
 
     } catch (error) {

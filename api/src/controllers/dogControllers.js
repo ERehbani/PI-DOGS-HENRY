@@ -1,8 +1,8 @@
 const { default: axios } = require('axios')
 const { Dog } = require('../db')
 
-const createDog = async(name, origin, breed_group, image, life_span, height, weight) =>
-    await Dog.create({name, origin, breed_group, image, life_span, height, weight})         // PROMESA
+const createDog = async(name, origin, breed_group, image, life_span, height, weight) =>{
+    await Dog.create({name, origin, breed_group, image, life_span, height, weight})      }   // PROMESA
 
 
 const getBreedById = async(id, source) => {
