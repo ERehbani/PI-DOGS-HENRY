@@ -24,8 +24,8 @@ const getBreedIdHandler = async(req, res) => {
 
 const createDogHandler = async (req, res) => {
     try {
-        const { id, name, origin, breed_group, image, life_span, height, weight } = req.body;
-        const newDog = await createDog( id, name, origin, breed_group, image, life_span, height, weight);
+        const { name, origin, breed_group, temperament, image, life_span, height, weight } = req.body;
+        const newDog = await createDog( name, origin, breed_group, temperament, image, life_span, height, weight);
         res.status(201).json(newDog)
     } catch (error) {
         res.status(400).json({error: error.message})

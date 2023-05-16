@@ -3,8 +3,10 @@
 }
 
 body {
-  background-image:url('../src/imgs/kalen-emsley-Bkci_8qcdvQ-unsplash.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  font-family: Poppins, sans-serif;
+  /* background-image:url('../src/imgs/kalen-emsley-Bkci_8qcdvQ-unsplash.jpg');
+  background-size:contain;
+  background-repeat: repeat;
+  min-height: 100vh;
+  font-family: Poppins, sans-serif; */
+  background-color: antiquewhite;
 }

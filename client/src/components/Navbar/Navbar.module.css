@@ -1,0 +1,11 @@
+.navBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: aliceblue;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 15px;
+    border: 1px solid black;
+    height: max-content;
+}

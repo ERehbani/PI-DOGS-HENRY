@@ -4,7 +4,7 @@ const { Dog, Temperaments } = require('../db')
 // const createDog = async(name, origin, breed_group, image, life_span, height, weight) =>
 //     await Dog.create({name, origin, breed_group, image, life_span, height, weight})         // PROMESA
 
-const createDog = async(name, origin, breed_group, image, life_span, height, weight) =>{
+const createDog = async(name, origin, breed_group, temperament, image, life_span, height, weight) =>{
     const newDog = await Dog.create({
         name:name,
         origin:origin,
@@ -12,14 +12,16 @@ const createDog = async(name, origin, breed_group, image, life_span, height, wei
         height:height,
         weight:weight,
         image:image,
+        breed_group:breed_group
     });
     newDog.addTemperaments(await Temperaments.findAll({
         where: {
-          id: id,
-        },
-      }))
+            id: temperament
+        }
+    }))
 
-    await Dog.create({name, origin, breed_group, image, life_span, height, weight})
+    return newDog
+    // await Dog.create({name, origin, breed_group, image, life_span, height, weight})
     }     // PROMESA
 
 

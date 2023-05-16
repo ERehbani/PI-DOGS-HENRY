@@ -5,6 +5,8 @@ const dogsRouter = Router()
 
 dogsRouter.get('/', getDogHandler)
 dogsRouter.get('/:id', getBreedIdHandler)
+dogsRouter.get('/name', )
+
 dogsRouter.post('/', createDogHandler)
 
 

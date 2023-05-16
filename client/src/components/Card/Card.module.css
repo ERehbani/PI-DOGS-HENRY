@@ -1,0 +1,13 @@
+.card img {
+    /* width: 350px; */
+    height: 350px;
+    object-fit:contain;
+    margin-top: -10px;
+}
+
+.card {
+    background-color: aqua;
+    display: inline-block;
+    padding: 5px;
+    border: 2px solid black;
+}
