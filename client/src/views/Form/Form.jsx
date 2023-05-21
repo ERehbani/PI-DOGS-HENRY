@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import './Form.css'
 
 
 
@@ -8,10 +9,13 @@ const Form = () => {
     const [form, setForm] = useState({
         name:"",
         origin:"",
+        breed_group:"",
         life_span:"",
-        weight:"",
+        weightMin:"",
+        weightMax:"",
         height:"",
-        image:""
+        image:"",
+        temperament: 0
     })
 
     // const [errors, setErrors] = useState({
@@ -43,37 +47,49 @@ const Form = () => {
 
     const submitHandler = (event) => {
         event.preventDefault()
-        const {data} = axios.post("http://localhost:3001/dogs", form)
-        console.log(data)
+        axios.post("http://localhost:3001/dogs", form)
         .then(res=>alert(res))
+
     }
 
     return (
         <form onSubmit={submitHandler}>
-            <div>
-                <label>Name: </label>
+            <div className="nombre">
+                <label>Nombre: </label>
                 <input type="text" value={form.name} onChange={changeHandler} name="name"/>
             </div>
-            <div>
-                <label>Origin: </label>
-                <input type="text" value={form.origin}onChange={changeHandler} name="origin"/>
+            <div className="origen">
+                <label>Origen: </label>
+                <input type="text" value={form.origin} onChange={changeHandler} name="origin"/>
                 {/* {errors.email && <span>{errors.email}</span>} */}
             </div>
-            <div>
+            <div className="tiempoDeVida">
                 <label>Tiempo de vida: </label>
-                <input type="text" value={form.life_span}onChange={changeHandler} name="life_span"/>
+                <input type="text" value={form.life_span} onChange={changeHandler} name="life_span"/>
             </div>
-            <div>
-                <label>Peso: </label>
-                <input type="text" value={form.weight}onChange={changeHandler} name="weight"/>
+            <div className="pesoMinimo">
+                <label>Peso mínimo: </label>
+                <input type="text" value={form.weightMin} onChange={changeHandler} name="weightMin"/>
             </div>
-            <div>
+            <div className="pesoMaximo">
+                <label>Peso máximo: </label>
+                <input type="text" value={form.weightMax} onChange={changeHandler} name="weightMax"/>
+            </div>
+            <div className="altura">
                 <label>Altura: </label>
-                <input type="text" value={form.height}onChange={changeHandler} name="height"/>
+                <input type="text" value={form.height} onChange={changeHandler} name="height"/>
             </div>
-            <div>
+            <div className="imagen">
                 <label>Imagen: </label>
-                <input type="text" value={form.image}onChange={changeHandler} name="image"/>
+                <input type="text" value={form.image} onChange={changeHandler} name="image"/>
+            </div>
+            <div className="raza">
+                <label>Raza: </label>
+                <input type="text" value={form.breed_group} onChange={changeHandler} name="breed_group"/>
+            </div>
+            <div className="temperamento">
+                <label>Temperamento: </label>
+                <input type="number" value={form.temperament} onChange={changeHandler} name="temperament"/>
             </div>
 
             <button type="submit">Submit</button>

@@ -5,8 +5,8 @@
 
 // const postDogs = async (dogInfo) => {
 //     try {
-//         const {name,bred_for,breed_group,origin,life_span,minHeight,maxHeight,minWeight,maxWeight,image,temperamentId1,temperamentId2,temperamentId3,temperamentId4} = dogInfo;
-//         if(!name||!bred_for||!breed_group||!origin||!life_span||!minHeight||!maxHeight||!minWeight||!maxWeight||!image||!temperamentId1||!temperamentId2||!temperamentId3 || !temperamentId4) 
+//         const {name,bred_for,breed_group,origin,life_span,minHeight,maxHeight,weightMin,weightMax,image,temperamentId1,temperamentId2,temperamentId3,temperamentId4} = dogInfo;
+//         if(!name||!bred_for||!breed_group||!origin||!life_span||!minHeight||!maxHeight||!weightMin||!weightMax||!image||!temperamentId1||!temperamentId2||!temperamentId3 || !temperamentId4) 
 //         throw Error ('Por favor ingrese todos los datos');
 
 
@@ -18,8 +18,8 @@
 //             life_span:life_span,
 //             minHeight:minHeight,
 //             maxHeight:maxHeight,
-//             minWeight:minWeight,
-//             maxWeight:maxWeight,
+//             weightMin:weightMin,
+//             weightMax:weightMax,
 //             image:image,
 //         });
 

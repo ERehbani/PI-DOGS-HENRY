@@ -19,20 +19,42 @@ const getBreedIdHandler = async(req, res) => {
         res.status(200).json(breed)
     } catch (error) {
         res.status(400).json({ error: error.message });
+        console.log(error)
+    }
+}
+
+const getDog = async (req, res) => {
+    const { name } = req.query;
+
+    try {
+        const allDogs = await getAllDogs()
+
+            if(name) {
+                const dogName = allDogs.filter(dog => 
+                    dog.name.toLowerCase().includes(name.toLowerCase()))
+            }
+            return dogName
+            ? res.status(200).json(dogName)
+            : res.status(400).json('Dog not found')
+        
+    }
+    catch (error) {
+        res.status(400).json({error: error.message})
     }
 }
 
 const createDogHandler = async (req, res) => {
     try {
-        const { name, origin, breed_group, temperament, image, life_span, height, weight } = req.body;
-        const newDog = await createDog( name, origin, breed_group, temperament, image, life_span, height, weight);
+        const { name, origin, breed_group, temperament, image, life_span, height, weightMin, weightMax, averageWeight } = req.body;
+        const newDog = await createDog( name, origin, breed_group, temperament, image, life_span, height, weightMin, weightMax, averageWeight);
         res.status(201).json(newDog)
     } catch (error) {
         res.status(400).json({error: error.message})
+
     }
 
 }
 
 
 
-module.exports = {getDogHandler, getBreedIdHandler, createDogHandler}
+module.exports = {getDogHandler, getBreedIdHandler, createDogHandler, getDog}

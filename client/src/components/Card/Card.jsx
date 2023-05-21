@@ -1,15 +1,19 @@
 import style from "./Card.module.css"
+import { NavLink } from 'react-router-dom'
 
-const Card = (props) => {
+const Card = (props, id) => {
+    
     return (
         <div className={style.card}>
+            
 
-            <div>
-                <p>Name: {props.name}</p>
-                <p>Temperament: {props.temperament}</p>
+            <img src={props.image} alt={props.name}/>            
+
+            <div className={style.cardInformation}>
+            <NavLink to={`/detail/${id}`}>{props.name}</NavLink>
+                <p>{props.temperament}</p>
                 <p>Weight: {props.weight}kg</p>
-                </div>
-            <img src={props.image} alt={props.name}/>
+            </div>
 
         </div>
     )

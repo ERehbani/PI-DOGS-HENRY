@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
 import { useDispatch } from "react-redux";
 import { getDogs } from "../../redux/actions";
-
+import "./Home.css"
 
 
 const Home = () => {
@@ -17,7 +17,7 @@ const Home = () => {
     //  useEffect()     -       useDispatch
     return (
         <div>
-            <h1>Ruta de Home</h1>
+            <h1>Cantidades industriales de peyitos.</h1>
             <CardsContainer />
         </div>
     )

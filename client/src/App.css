@@ -8,5 +8,12 @@ body {
   background-repeat: repeat;
   min-height: 100vh;
   font-family: Poppins, sans-serif; */
-  background-color: antiquewhite;
+  background-color: #fff;
+  font-family: 'Inter', sans-serif;
+font-family: 'Rubik', sans-serif;
+font-family: 'Wix Madefor Display', sans-serif;
+}
+
+h1 {
+  font-family: 'Wix Madefor Display', sans-serif;
 }

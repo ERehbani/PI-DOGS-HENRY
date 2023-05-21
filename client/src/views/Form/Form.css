@@ -1,0 +1,12 @@
+form div {
+    padding: 10px;
+    margin: auto;
+}
+
+form {
+    width: 500px;
+    height: 450px;
+    margin-left: 38%;
+    margin-top: 10%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
