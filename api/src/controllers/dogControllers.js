@@ -1,6 +1,8 @@
 const { default: axios } = require('axios')
-const { Dog, Temperaments } = require('../db')
+const { Dog, Temperaments, Image } = require('../db')
 const { API_KEY } = process.env
+const uuid = require('uuid');
+
 
 // const createDog = async(name, origin, breed_group, image, life_span, height, weight) =>
 //     await Dog.create({name, origin, breed_group, image, life_span, height, weight})         // PROMESA
@@ -28,15 +30,6 @@ const createDog = async(name, origin, breed_group, temperament, image, life_span
     }     // PROMESA
 
 
-const getBreedById = async(id, source) => {
-    const breed = 
-        source === "api" ?
-            (await axios.get(`https://api.thedogapi.com/v1/breeds/${id}`)).data
-            : await Dog.findByPk(id)
-
-    return breed
-    }
-
 const cleanArray= (arr) => arr.map((elem) => {
     return {
         id: elem.id,
@@ -56,7 +49,7 @@ const getAllDogs = async() => {      //buscar en bdd y api
     let apiData = await axios(
         `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`
       );
-    
+
       let fromApi = await apiData.data.map((inst) => {
         
         let weightMin = parseInt(inst.weight.metric.slice(0, 2).trim());
@@ -99,6 +92,80 @@ const getAllDogs = async() => {      //buscar en bdd y api
       return fromApi;
     }
 
+    // const getBreedById = async(id, source) => {
+    //   const breed = 
+    //       source === "api" ?
+    //           (await axios.get(`https://api.thedogapi.com/v1/breeds/${id}`)).data
+    //           : await Dog.findByPk(id)
+    //           console.log(breed)
+
+    //           return breed
+    //   }
+    const getDogsById = async (id) => {
+      try {
+          // let id = id.parseInt()
+          //Primero busco en la DB segun ID uuid
+          if(uuid.validate(id)){
+              let dogDB = await Dog.findOne({
+                  where: {id:id,
+                  }})
+              if(dogDB) return dogDB;
+          }
+  
+          //Corroboro que sea un numero!  luego que este entre los permitidos
+          // if(isNaN(id))  throw Error (`El ID ${id} debe ser numerico`)
+  
+          const {data} = await axios(`https://api.thedogapi.com/v1/breeds/${id}?${API_KEY}`);
+  
+          //Corroboro que no me retorne un objeto vacio
+          if(!Object.keys(data).length) throw Error (`El ${id} no es valido`)
+  
+  
+  
+              //Desarrollo las alturas en Metrica
+              let minHeight = parseInt(data.height.metric.slice(0,2).trim());
+              let maxHeight = parseInt(data.height.metric.slice(4).trim());
+              //Desarollo los pesos en Metrica
+              let minWeight = parseInt(data.weight.metric.slice(0,2).trim());
+              let maxWeight = parseInt(data.weight.metric.slice(4).trim());
+  
+              //Si data.ref viene vacio no entro a la DB
+              let imagen= '';
+              if(data.reference_image_id){
+              imagen = await Image?.findOne({
+                  where: {
+                    id:data.reference_image_id
+                  }
+                })}
+  
+                //Reviso respuesta la DB y la API
+                let newImagen = imagen ? imagen.dataValues.image : data.image;
+  //SI no exite le adhiero una imagen Provisoria
+  
+          //Manejo la info de data, genero OBJ  ---
+                let averageWeight = minWeight + maxWeight / 2
+              const dogDetail = {
+                    id: data.id,
+                    name: data.name,
+                    bred_for: data.bred_for,
+                    breed_group: data.breed_group,
+                    origin: data.origin,
+                    life_span:data.life_span,
+                    minHeight,
+                    maxHeight,
+                    minWeight,
+                    maxWeight,
+                    averageWeight,
+                    image: newImagen,
+                    temperament:data.temperament.split(','),
+                }
+                console.log(dogDetail)
+          return dogDetail;
+  
+      } catch (error) {
+          return {error: error.message}
+      }
+  }
 
 const searchDogByName = async(name) => {
     const databaseDogs = await Dog.findAll({
@@ -114,5 +181,5 @@ const searchDogByName = async(name) => {
 
     return [...filteredApi, ...databaseDogs]
 }
-
-module.exports = { createDog, getBreedById, getAllDogs, searchDogByName }
+// getBreedById
+module.exports = { createDog,  getAllDogs, searchDogByName, getDogsById }

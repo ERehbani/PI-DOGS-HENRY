@@ -1,4 +1,4 @@
-const { createDog, getBreedById, searchDogByName, getAllDogs } = require("../controllers/dogControllers")
+const { createDog, getDogsById, searchDogByName, getAllDogs } = require("../controllers/dogControllers")
 const Dog = require('../models/Dog')
 
 const getDogHandler = async(req, res) => {
@@ -15,7 +15,7 @@ const getBreedIdHandler = async(req, res) => {
     // isNaN (412-k312h7f3-423l4i-234)
     // else /23
     try {
-        const breed = await getBreedById(id, source)
+        const breed = await getDogsById(id, source)
         res.status(200).json(breed)
     } catch (error) {
         res.status(400).json({ error: error.message });

@@ -33,6 +33,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    Imagenes: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
     // createdInBd: {                  // sirve para hacer una distincion entre los que estan en base de datos y los que estan en la api
     //   type: DataTypes.BOOLEAN,
     //   allowNull: false,
