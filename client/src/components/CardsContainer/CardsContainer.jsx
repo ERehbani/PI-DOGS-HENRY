@@ -28,6 +28,7 @@ import { useEffect } from "react";
 const CardsContainer = () => {
     // const dogs = useSelector(state => state.dogs)
     const dogsPage = useSelector(state => state.dogsCurrentPage)
+    // const dogsPage = useSelector(state => state.dogs)
 
 
     return (

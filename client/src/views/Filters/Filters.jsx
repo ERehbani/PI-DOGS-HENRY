@@ -18,7 +18,7 @@ const Filters = () => {
             })
         }
     })
-    console.log(temperamentSearch)
+    console.log(allTemperaments)
     
     const handlerFilter = event => {
         // if(event.target.value === "All") dispatch(getDogs(temperamentSearch))

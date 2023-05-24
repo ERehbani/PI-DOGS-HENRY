@@ -7,16 +7,20 @@ const uuid = require('uuid');
 // const createDog = async(name, origin, breed_group, image, life_span, height, weight) =>
 //     await Dog.create({name, origin, breed_group, image, life_span, height, weight})         // PROMESA
 
-const createDog = async(name, origin, breed_group, temperament, image, life_span, height, weightMin, weightMax, averageWeight) =>{
+const createDog = async(name, origin, breed_group, temperament, image, life_span, height, weightMin, weightMax) =>{
+  
+  const averageWeight = (parseFloat(weightMax) / 2 + parseFloat(weightMin) / 2);
+
+
     const newDog = await Dog.create({
         name:name,
         origin:origin,
         life_span:life_span,
         height:height,
         weightMax:weightMax,
+        averageWeight: averageWeight,
         weightMin:weightMin,
-        averageWeight:averageWeight,
-        image:image,
+        Imagenes:image,
         breed_group:breed_group
     });
     newDog.addTemperaments(await Temperaments.findAll({
@@ -94,7 +98,14 @@ const getAllDogs = async() => {      //buscar en bdd y api
           temperament: inst.temperament,
         };
       });
-      return fromApi;
+
+      let pushDog = await Dog.findAll();
+      const combinedArray = [...fromApi, ...pushDog];
+      const flatArray = combinedArray.flat();
+
+      console.log(flatArray);
+
+      return flatArray; 
     }
 
     // const getBreedById = async(id, source) => {

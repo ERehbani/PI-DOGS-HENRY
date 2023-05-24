@@ -58,6 +58,7 @@
 
 .button:hover {
   transform: translateY(-1px);
+  cursor:crosshair;
 }
 
 .button:active {

@@ -5,11 +5,16 @@ import { GET_DOG, GET_DOGS, DOG_DETAIL, FILTER, ORDER, ORDER_WEIGHT, SET_PAGE, D
 
 export const getDogs = () => {
     return async function (dispatch) {
-        const { data } = await axios.get('http://localhost:3001/dogs');
-
-        dispatch({type: GET_DOGS, payload: data })
+        try {
+            const { data } = await axios.get('http://localhost:3001/dogs');
+            dispatch({ type: GET_DOGS, payload: data });
+        } catch (error) {
+        // Manejar el error aquí
+        console.log(error);
+        }
     };
 };
+
 
 export const getDog = (name) => {
     return async function(dispatch){
@@ -27,15 +32,13 @@ export const findDogById = (id) => {
             if (!data) {
                 throw new Error(`No dog was found with this id: ${id}`);
             }
-            return dispatch({
-                type: DOG_DETAIL,
-                payload: data,
-            });
-            
-        } catch (error) {
-            
-            alert(error.message);
-        }
+        dispatch({
+            type: DOG_DETAIL,
+            payload: data,
+        });
+    } catch (error) {
+        alert(error.message);
+    }
     };
 };
 

@@ -4,21 +4,26 @@ import { dogsOnPage, nextPage, prevPage } from "../../redux/actions";
 
 
 const Paginado = () => {
-    let dogsPerPage = 8;
     const dispatch = useDispatch()
     const dogsState = useSelector ((state) => state.dogs)
-    const allDogsState = useSelector ((state) => state.allDogs)
+    // const allDogsState = useSelector ((state) => state.allDogs)
     const currentPage = useSelector((state) => state.page)
+    
+    // 
+    let dogsPerPage = 8;
     const totDogs = dogsState.length
     const firstIndex = (currentPage - 1) * dogsPerPage
-    let dogsCurrentPage = [...allDogsState].splice(firstIndex, dogsPerPage) 
 
-    console.log(dogsCurrentPage)
+    let currPageDog = [...dogsState].splice(firstIndex, dogsPerPage)  // el metodo splice corta (multiplos de 8, 8 unidades >>>>>)
+
 
     useEffect(() => {
-        dispatch(dogsOnPage(dogsCurrentPage))
-    }, [dispatch, dogsState, allDogsState, dogsCurrentPage])
-    
+        dispatch(dogsOnPage(currPageDog))
+
+    }, [dispatch, dogsState, currPageDog])
+
+
+
     const prevHandler = (currPage) => {
         if(currPage === 1) return
         return dispatch(prevPage(currPage))
@@ -32,12 +37,11 @@ const Paginado = () => {
     //     setDogs([...allDogs]?.splice(0, dogsPerPage));
     // }, [allDogs, dogsPerPage]);
 
-    
-    
+
     //   useEffect(() => {
         //     dispatch(currentPage(dogs))
         //   },[nextPage])
-        
+
     return (
         <div>
             <button onClick={() => prevHandler(currentPage)}>PREV</button>
@@ -45,7 +49,7 @@ const Paginado = () => {
             <button onClick={() => nextHandler(currentPage)}>NEXT</button>
         </div>
     )
-    
+
 }
 
 

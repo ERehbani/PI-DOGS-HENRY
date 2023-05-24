@@ -7,10 +7,16 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
   }
   
   .detailContainer img {
     height: 500px;
+    border-radius: 20px 0 0 20px;
+    -webkit-box-shadow: 8px 0px 8px -6px rgba(0,0,0,0.62);
+    -moz-box-shadow: 8px 0px 8px -6px rgba(0,0,0,0.62);
+    box-shadow: 8px 0px 8px -6px rgba(0,0,0,0.62);
   }
   
   .detailContainer p {
@@ -46,7 +52,9 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    -webkit-box-shadow: inset -3px 14px 8px -7px rgba(0,0,0,0.43);
+-moz-box-shadow: inset -3px 14px 8px -7px rgba(0,0,0,0.43);
+box-shadow: inset -3px 14px 8px -7px rgba(0,0,0,0.43);
 }
 
 

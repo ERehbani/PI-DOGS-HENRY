@@ -13,10 +13,14 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       // allowNull: false,
     },
-    image: {
+    Imagenes: {
       type: DataTypes.STRING,
       allowNull: false
     },
+    // image: {
+    //   type: DataTypes.STRING,
+    //   // allowNull: false
+    // },
     weightMin: {
       type: DataTypes.STRING,
       // allowNull: false
@@ -33,10 +37,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    Imagenes: {
-      type: DataTypes.STRING,
-      allowNull: false
-    }
     // createdInBd: {                  // sirve para hacer una distincion entre los que estan en base de datos y los que estan en la api
     //   type: DataTypes.BOOLEAN,
     //   allowNull: false,

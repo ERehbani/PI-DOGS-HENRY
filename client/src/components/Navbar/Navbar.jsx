@@ -5,7 +5,7 @@ const NavBar = () => {
 return (
     <div className={style.navBar}>
         
-            <NavLink to='/' activeClassName="linkHome" style={{ textDecoration: 'none', color: 'black'  }}>HOME</NavLink>
+            <NavLink to='/home' activeClassName="linkHome" style={{ textDecoration: 'none', color: 'black'  }}>HOME</NavLink>
             <NavLink to='/form' activeClassName="linkForm" style={{ textDecoration: 'none', color: 'black' }}>FORM</NavLink>
             <NavLink to='/dogs' activeClassName="linkDogs" style={{ textDecoration: 'none', color: 'black' }}>DOGS</NavLink>
         

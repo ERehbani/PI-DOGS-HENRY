@@ -42,10 +42,6 @@ const rootReducer = (state = initialState, action) => {
             }
         }
 
-        // case FILTER : {
-
-        // }
-        
         case ORDER : {
             console.log(state.dogs)
             return {
