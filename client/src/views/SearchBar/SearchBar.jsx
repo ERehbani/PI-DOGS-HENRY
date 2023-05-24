@@ -1,16 +1,27 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getDog } from "../../redux/actions";
 
-export default function SearchBar({onSearch}) {
-   const [id, setId] = useState('');
+const SearchBar = () => {
+   const [name, setName] = useState('');
+
+   const dispatch = useDispatch()
 
    const handleChange = (event) => {
-      setId(event.target.value)
+      setName(event.target.value)
    }
-
+   
+   const onSearch = () => {
+      dispatch(getDog(name))
+   }
+   
    return (
       <div>
-         <input type="search" onChange={handleChange} value={id}/>
-         <button onClick={() => {onSearch(id); setId('')}}>Agregar</button>
+         <input type="search" onChange={handleChange} value={name}/>
+         <button onClick={onSearch}>Agregar</button>
       </div>
    );
 }
+
+
+export default SearchBar

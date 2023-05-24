@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import Card from "../Card/Card";
 import style from "./CardsContainer.module.css"
+import { useEffect } from "react";
 
 
 
@@ -25,11 +26,13 @@ import style from "./CardsContainer.module.css"
 
 
 const CardsContainer = () => {
-    const dogs = useSelector(state => state.dogs)
+    // const dogs = useSelector(state => state.dogs)
+    const dogsPage = useSelector(state => state.dogsCurrentPage)
+
 
     return (
         <div className={style.cardsContainer}>
-            {dogs.map(dog => {
+            {dogsPage.map(dog => {
                 // Verifica que dog.temperament está definido antes de intentar llamar a split
                 let firstTemperament = '';
                 if (dog.temperament) {
@@ -41,7 +44,7 @@ const CardsContainer = () => {
                             id={dog.id}
                             name={dog.name}
                             temperament={firstTemperament}
-                            weight={dog.averageWeight}
+                            weight={dog.averageWeight ? dog.averageWeight : "5 - 14"}
                             image={dog.image}
                         />
                 })}

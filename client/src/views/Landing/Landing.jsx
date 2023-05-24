@@ -1,12 +1,18 @@
-// import { useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import styles from "./Landing.module.css"
 
 
 
-// const Landing = () => {
-//     return (
-//         <h1>Landing</h1>
-//         <button></button>
-//     )
-// }
 
-// export default Landing;
+const Landing = () => {
+    return (
+        <div className={styles.landing}>
+            <div className={styles.landingContainer}>
+                <h1 className={styles.title}>Projeto solo sobre cachorritas :P</h1>
+                <NavLink to="/home" activeClassName="active"><button className={styles.button}>ENTRAR</button></NavLink>
+            </div>
+        </div>
+    )
+}
+
+export default Landing;

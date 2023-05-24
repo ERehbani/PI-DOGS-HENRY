@@ -77,12 +77,17 @@ const getAllDogs = async() => {      //buscar en bdd y api
             averageWeight = ((weightMax) + (weightMin)) / 2;
           }
         }
+         //Desarrollo las alturas en Metrica
+        let minHeight = parseInt(inst.height.metric.slice(0,2).trim());
+        let maxHeight = parseInt(inst.height.metric.slice(4).trim());
+        
         return {
           id: inst.id,
           weightMin: weightMin,
           weightMax: weightMax,
           averageWeight: averageWeight,
-          height: inst.height,
+          maxHeight: maxHeight,
+          minHeight: minHeight,
           name: inst.name,
           life_span: inst.life_span,
           image: inst.image.url,

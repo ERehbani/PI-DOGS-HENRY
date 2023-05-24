@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-import SearchBar from '../SearchBar/SearchBar'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getDog } from '../../redux/actions';
@@ -20,7 +19,6 @@ const Dogs = () => {
     return (
         <div>
             <h1>Ruta de Dogos</h1>
-            <SearchBar/>
             <img src={dogSearch.image} alt="" />
             <h2>{dogSearch.name}</h2>
             <h2>{dogSearch.origin}</h2>
